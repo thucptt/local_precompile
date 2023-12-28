@@ -34,10 +34,17 @@ require "capistrano/rails/assets"
 require "capistrano/rails/migrations"
 require "capistrano/puma"
 # require "capistrano/passenger"
+require "capistrano/nvm"
+require "capistrano/yarn"
 
 install_plugin Capistrano::Puma
 
+set :rbenv_map_bins, %w[rake gem bundle ruby rails]
 set :rbenv_ruby, "2.7.0"
+set :rbenv_roles, :all
+
+set :nvm_map_bins, %w[node npm yarn]
+set :nvm_node, 'v16.20.2'
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
 Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }
