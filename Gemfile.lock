@@ -258,7 +258,6 @@ DEPENDENCIES
   capistrano-yarn (~> 2.0, >= 2.0.2)
   capistrano3-puma (~> 5.2)
   capybara (>= 2.15)
-  date
   jbuilder (~> 2.7)
   listen (~> 3.2)
   puma (~> 4.1)

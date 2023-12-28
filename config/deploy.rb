@@ -37,3 +37,16 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
+
+set :yarn_flags, ''
+
+namespace :deploy do
+  desc 'Install node modules using Yarn'
+  task :yarn_install do
+    on roles(:web) do
+      within release_path do
+        execute :yarn, 'install', fetch(:yarn_flags)
+      end
+    end
+  end
+end
