@@ -39,10 +39,11 @@ require "capistrano/yarn"
 
 install_plugin Capistrano::Puma
 
+set :rbenv_type, :user
 set :rbenv_map_bins, %w[rake gem bundle ruby rails]
 set :rbenv_ruby, "2.7.0"
 set :rbenv_roles, :all
-
+set :nvm_type, :user
 set :nvm_map_bins, %w[node npm yarn]
 set :nvm_node, 'v16.20.2'
 
