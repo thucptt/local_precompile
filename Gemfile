@@ -27,20 +27,6 @@ gem 'jbuilder', '~> 2.7'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
-# Capistrano - easy to deployment with Ruby over SSH
-gem 'capistrano', '~> 3.18'
-# Puma integration for Capistrano 3
-gem 'capistrano3-puma', '~> 5.2'
-# rbenv integration for Capistrano
-gem 'capistrano-rbenv', '~> 2.2'
-# Rails specific Capistrano tasks
-gem 'capistrano-rails', '~> 1.6', '>= 1.6.3'
-# Bundler support for Capistrano 3.x
-gem 'capistrano-bundler', '~> 2.1'
-# based on capistrano/npm gem
-gem 'capistrano-yarn', '~> 2.0', '>= 2.0.2'
-# nvm support for Capistrano 3.x
-gem 'capistrano-nvm', '~> 0.0.7'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -54,6 +40,20 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  # Capistrano - easy to deployment with Ruby over SSH
+  gem 'capistrano', '~> 3.18'
+  # Puma integration for Capistrano 3
+  gem 'capistrano3-puma', '~> 5.2'
+  # rbenv integration for Capistrano
+  gem 'capistrano-rbenv', '~> 2.2'
+  # Rails specific Capistrano tasks
+  gem 'capistrano-rails', '~> 1.6', '>= 1.6.3'
+  # Bundler support for Capistrano 3.x
+  gem 'capistrano-bundler', '~> 2.1'
+  # based on capistrano/npm gem
+  gem 'capistrano-yarn', '~> 2.0', '>= 2.0.2'
+  # nvm support for Capistrano 3.x
+  gem 'capistrano-nvm', '~> 0.0.7'
 end
 
 group :test do
