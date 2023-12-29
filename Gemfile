@@ -25,7 +25,10 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
+# A subclass of Object includes Comparable module for handling dates
 gem 'date', '3.3.4'
+# Rake is a Make-like program implemented in Ruby
+gem 'rake', '~> 13.1'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

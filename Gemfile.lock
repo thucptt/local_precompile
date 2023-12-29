@@ -263,6 +263,7 @@ DEPENDENCIES
   listen (~> 3.2)
   puma (~> 4.1)
   rails (~> 6.0.6, >= 6.0.6.1)
+  rake (~> 13.1)
   sass-rails (>= 6)
   selenium-webdriver
   spring
