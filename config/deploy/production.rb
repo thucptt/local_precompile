@@ -7,6 +7,9 @@ server "54.196.84.135", user: "ubuntu", roles: %w{app db web}
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
+set :branch, :main
+set :rails_env, "production"
+
 set :ssh_options,
     forward_agent: true,
     auth_methods: %w[publickey],

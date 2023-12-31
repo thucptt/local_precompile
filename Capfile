@@ -27,29 +27,32 @@ install_plugin Capistrano::SCM::Git
 #   https://github.com/capistrano/passenger
 #
 # require "capistrano/rvm"
+# require "capistrano/rbenv"
 # require "capistrano/chruby"
+# require "capistrano/bundler"
+# require "capistrano/rails"
 # require "capistrano/passenger"
 
 require "capistrano/rbenv"
-require "capistrano/bundler"
-require "capistrano/rails/assets"
-require "capistrano/rails/migrations"
-require "capistrano/puma"
-require "capistrano/yarn"
-require "capistrano/nvm"
-
 set :rbenv_type, :user
 set :rbenv_ruby, "2.7.0"
 set :rbenv_map_bins, %w[rake gem bundle ruby rails]
 set :rbenv_roles, :all
 
+require "capistrano/bundler"
+require "capistrano/rails/assets"
+require "capistrano/rails/migrations"
+
+require "capistrano/puma"
+install_plugin Capistrano::Puma
+
+require "capistrano/yarn"
 set :yarn_flags, '--frozen-lockfile'
 
+require "capistrano/nvm"
 set :nvm_type, :user
 set :nvm_node, "v16.20.2"
 set :nvm_map_bins, %w[node npm yarn]
-
-install_plugin Capistrano::Puma
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
 Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }

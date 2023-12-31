@@ -5,7 +5,7 @@ set :application, "local_precompile"
 set :repo_url, "git@github.com:thucptt/local_precompile.git"
 
 # Default branch is :master
-ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/home/ubuntu/sites/local_precompile"
@@ -29,6 +29,8 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 # Default value for default_env is {}
 set :default_env, { "PATH": "/home/ubuntu/.nvm/versions/node/v16.20.2/bin:$PATH" }
 
+set :puma_pid, shared_path.join('tmp/pids/server.pid')
+set :puma_bind, "unix://#{shared_path.join('tmp/sockets/puma.sock')}"
 set :puma_config_path, -> { File.join(current_path, 'config', 'puma.rb') }
 
 # Default value for local_user is ENV['USER']
@@ -40,5 +42,4 @@ set :puma_config_path, -> { File.join(current_path, 'config', 'puma.rb') }
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
 
-before "deploy:starting", "puma:check_create_pid"
 after "deploy:publishing", "puma:restart"

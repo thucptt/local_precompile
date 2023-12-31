@@ -1,22 +1,32 @@
 namespace :puma do
-  desc 'Restart puma'
-  task :restart do
+  desc 'Start puma'
+  task :start do
     on roles(:app) do
       within current_path do
-        execute :bundle, :exec, :pumactl, '-P', fetch(:puma_pid), 'restart',
-                '--config', fetch(:puma_config_path), 'RAILS_ENV=production'
+        execute :bundle, 'exec', 'puma', '--config', "#{fetch(:puma_config_path)}", '--daemon'
       end
     end
   end
 
-  desc 'Check and create puma.pid if it does not exists'
-  task :check_create_pid do
+  desc 'Restart puma'
+  task :restart do
     on roles(:app) do
       within current_path do
-        unless test("[ -f #{shared_path}/tmp/pids/puma.pid ]")
-          execute :mkdir, '-p', "#{shared_path}/tmp/pids"
-          execute :touch, "#{shared_path}/tmp/pids/puma.pid"
+        if test("[ -f #{shared_path}/tmp/pids/server.pid ]")
+          execute :bundle, :exec, :pumactl, '-P', fetch(:puma_pid), 'restart',
+                  '--config', fetch(:puma_config_path), "RAILS_ENV=#{fetch(:rails_env)}"
+        else
+          invoke 'puma:start'
         end
+      end
+    end
+  end
+
+  desc 'Stop puma'
+  task :stop do
+    on roles(:app) do
+      within current_path do
+        execute :bundle, :exec, 'pumactl', '-P', fetch(:puma_pid), 'stop'
       end
     end
   end
