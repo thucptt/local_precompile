@@ -23,6 +23,7 @@ environment ENV.fetch("RAILS_ENV") { "production" }
 pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 
 bind "unix://#{tmp_path}/sockets/puma.sock"
+
 stdout_redirect "#{log_path}/puma.stdout.log", "#{log_path}/puma.stderr.log", true
 
 # Specifies the number of `workers` to boot in clustered mode.
