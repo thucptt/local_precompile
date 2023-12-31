@@ -8,6 +8,9 @@ max_threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
 min_threads_count = ENV.fetch("RAILS_MIN_THREADS") { max_threads_count }
 threads min_threads_count, max_threads_count
 
+log_path = "#{File.expand_path('../../..', __FILE__)}/log"
+tmp_path = "#{File.expand_path('../../..', __FILE__)}/tmp"
+
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 #
 port        ENV.fetch("PORT") { 3000 }
@@ -19,7 +22,8 @@ environment ENV.fetch("RAILS_ENV") { "production" }
 # Specifies the `pidfile` that Puma will use.
 pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 
-bind "unix://#{shared_path}/tmp/sockets/puma.sock"
+bind "unix://#{tmp_path}/sockets/puma.sock"
+stdout_redirect "#{log_path}/puma.stdout.log", "#{log_path}/puma.stderr.log", true
 
 # Specifies the number of `workers` to boot in clustered mode.
 # Workers are forked web server processes. If using threads and workers together
@@ -34,7 +38,7 @@ bind "unix://#{shared_path}/tmp/sockets/puma.sock"
 # before forking the application. This takes advantage of Copy On Write
 # process behavior so workers use less memory.
 #
-# preload_app!
+preload_app!
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
