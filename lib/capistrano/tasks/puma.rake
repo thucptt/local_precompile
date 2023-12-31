@@ -3,7 +3,7 @@ namespace :puma do
   task :start do
     on roles(:app) do
       within current_path do
-        execute :bundle, 'exec', 'puma', '--config', "#{fetch(:puma_config_path)}", '--daemon'
+        execute :bundle, 'exec', 'puma', '--config', "#{fetch(:puma_config_path)}"
       end
     end
   end
@@ -13,8 +13,7 @@ namespace :puma do
     on roles(:app) do
       within current_path do
         if test("[ -f #{shared_path}/tmp/pids/server.pid ]")
-          execute :bundle, :exec, :pumactl, '-P', fetch(:puma_pid), 'restart',
-                  '--config', fetch(:puma_config_path), "RAILS_ENV=#{fetch(:rails_env)}"
+          execute :bundle, :exec, :pumactl, '-P', fetch(:puma_pid), 'restart', '--config', fetch(:puma_config_path)
         else
           invoke 'puma:start'
         end
