@@ -27,7 +27,9 @@ append :linked_files, "config/master.key"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "vendor", "storage"
 
 # Default value for default_env is {}
-# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+set :default_env, { "PATH": "/home/ubuntu/.nvm/versions/node/v16.20.2/bin:$PATH" }
+
+set :puma_config_path, -> { File.join(current_path, 'config', 'puma.rb') }
 
 # Default value for local_user is ENV['USER']
 # set :local_user, -> { `git config user.name`.chomp }
@@ -38,17 +40,5 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
 
-set :bundle_path, -> { shared_path.join('vendor/bundle') }
-
-set :yarn_flags, ''
-
-namespace :deploy do
-  desc 'Install node modules using Yarn'
-  task :yarn_install do
-    on roles(:web) do
-      within release_path do
-        execute :yarn, 'install', fetch(:yarn_flags)
-      end
-    end
-  end
-end
+before "deploy:starting", "puma:check_create_pid"
+after "deploy:publishing", "puma:restart"
