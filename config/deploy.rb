@@ -30,8 +30,10 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 set :default_env, { "PATH": "/home/ubuntu/.nvm/versions/node/v16.20.2/bin:$PATH" }
 
 set :puma_pid, shared_path.join('tmp/pids/server.pid')
+
 set :puma_bind, "unix://#{shared_path.join('tmp/sockets/puma.sock')}"
-set :puma_config_path, -> { File.join(current_path, 'config', 'puma.rb') }
+
+set :puma_config_path, -> { File.join(current_path, 'config', 'puma', "#{fetch(:rails_env)}.rb") }
 
 # Default value for local_user is ENV['USER']
 # set :local_user, -> { `git config user.name`.chomp }

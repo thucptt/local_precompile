@@ -8,7 +8,8 @@ server "54.196.84.135", user: "ubuntu", roles: %w{app db web}
 # server "db.example.com", user: "deploy", roles: %w{db}
 
 set :branch, :main
-set :rails_env, "production"
+
+set :rails_env, :production
 
 set :ssh_options,
     forward_agent: true,
