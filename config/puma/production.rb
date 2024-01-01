@@ -19,10 +19,10 @@ environment "production"
 # Specifies the `pidfile` that Puma will use.
 pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 
-tmp_path = "#{File.expand_path('../../..', __FILE__)}/shared/tmp"
+tmp_path = "#{File.expand_path('../../..', __FILE__)}/tmp"
 bind "unix://#{tmp_path}/sockets/puma.sock"
 
-log_path = "#{File.expand_path('../../..', __FILE__)}/shared/log"
+log_path = "#{File.expand_path('../../..', __FILE__)}/log"
 stdout_redirect "#{log_path}/puma.stdout.log", "#{log_path}/puma.stderr.log", true
 
 # Specifies the number of `workers` to boot in clustered mode.
