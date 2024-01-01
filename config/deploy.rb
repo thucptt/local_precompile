@@ -43,5 +43,3 @@ set :puma_config_path, -> { File.join(current_path, 'config', 'puma', "#{fetch(:
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
-
-after "deploy:publishing", "puma:restart"

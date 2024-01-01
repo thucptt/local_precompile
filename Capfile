@@ -40,19 +40,19 @@ set :rbenv_map_bins, %w[rake gem bundle ruby rails]
 set :rbenv_roles, :all
 
 require "capistrano/bundler"
-require "capistrano/rails/assets"
+# require "capistrano/rails/assets"
 require "capistrano/rails/migrations"
 
-require "capistrano/puma"
-install_plugin Capistrano::Puma
+# require "capistrano/puma"
+# install_plugin Capistrano::Puma
 
-require "capistrano/yarn"
-set :yarn_flags, '--frozen-lockfile'
+# require "capistrano/yarn"
+# set :yarn_flags, '--frozen-lockfile'
 
-require "capistrano/nvm"
-set :nvm_type, :user
-set :nvm_node, "v16.20.2"
-set :nvm_map_bins, %w[node npm yarn]
+# require "capistrano/nvm"
+# set :nvm_type, :user
+# set :nvm_node, "v16.20.2"
+# set :nvm_map_bins, %w[node npm yarn]
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
 Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }
